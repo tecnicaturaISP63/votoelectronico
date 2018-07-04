@@ -1,0 +1,42 @@
+#derecha {
+	text-align:right;
+	
+}
+
+body{
+	background-color:#00aa88;
+}
+
+.con1 {
+	background-color: white;
+	padding:40px 220px;
+	margin:1px;
+	display:inline-block;
+	font-size:18px;
+}
+
+.con2 {
+	background-color: white;
+	padding:40px 220px;
+	margin:1px;
+	display:inline-block;
+	float: right;
+	font-size:18px;
+}
+.derecha{
+	float:right;
+	margin: 5px 330px 5px 5px ;
+	font-size:18px;
+}
+
+.izquierda{
+	float:left;
+	margin: 5px 5px 5px 8px;
+	font-size:18px;
+}
+
+.center{
+	text-align: center;
+	margin: 150px;
+	font-size:18px;
+}
