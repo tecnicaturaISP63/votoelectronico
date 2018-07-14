@@ -41,15 +41,16 @@ require("funciones/sesiones.php");
             //SI ENCONTRO AL USUARIO EN LA BASE
             if ($resultadoQR!=false)
                 {
+                    IniciarSesionQR($qrleido,$resultadoQR);
+                    
                     if(EsAdministrador($resultadoQR))
                     {
-                        print "Eres administrador";
-                        IniciarSesionQR($qrleido,$resultadoQR);
+                        //IniciarSesionQR($qrleido,$resultadoQR);
                         header ("Location:administrador.php");
                     }
                     else
                     {
-                        IniciarSesionQR($qrleido,$resultadoQR);
+                        //IniciarSesionQR($qrleido,$resultadoQR);
                         //Se ingresa un voto en blanco
                         Votar(0, $resultadoQR);
                         header ("Location:votar.php");

@@ -14,16 +14,19 @@ function conectar()
 
 function InsertarRegistro($consultaSQL)
 {
-      $conexion = conectar();
-  
-      if ($conexion->query($consultaSQL) === TRUE) {
-            $UltId = $conexion->insert_id;
-            return $UltId;
-        } else {
-            echo "Error: " . $consultaSQL . "<br>" . $conexion->error;
-        }
-
-        $conexion->close(); 
+    $conexion = conectar();
+    
+    if($conexion->query($consultaSQL) === TRUE)
+    {
+        $UlcId = $conexion->insert_id;
+        return $UlcId;
+    }
+    else
+    {
+        echo "Error: " . $consultaSQL . "<br>" . $conexion->error;
+    }
+    
+    $conexion->close();
 }
 
 
@@ -59,23 +62,6 @@ function EsAdministrador($idQR)
     {
         print "NO SE PUDO CONECTAR A LA BASE DE DATOS";
     }
-}
-
-function InsertarRegistro($consultaSQL)
-{
-    $conexion = conectar();
-    
-    if($conexion->query($consultaSQL) === TRUE)
-    {
-        $UlcId = $conexion->insert_id;
-        return $UlcId;
-    }
-    else
-    {
-        echo "Error: " . $consultaSQL . "<br>" . $conexion->error;
-    }
-    
-    $conexion->close();
 }
 
 function ExisteQR($codQR)
