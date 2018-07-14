@@ -12,6 +12,20 @@ function conectar()
     return $conexion;
 }
 
+function InsertarRegistro($consultaSQL)
+{
+      $conexion = conectar();
+  
+      if ($conexion->query($consultaSQL) === TRUE) {
+            $UltId = $conexion->insert_id;
+            return $UltId;
+        } else {
+            echo "Error: " . $consultaSQL . "<br>" . $conexion->error;
+        }
+
+        $conexion->close(); 
+}
+
 
 function EjecutarConsulta($consultaSQL)
 {
@@ -71,6 +85,7 @@ function InsertarQR($codQR)
     $consultaSQL=" INSERT INTO qr (QRcodigo,usado,administrador) values ('$codQR', 0, 0)";
     $resultado=  EjecutarConsulta($consultaSQL);
 
+
      if (isset($resultado))
     {
             return true;    
@@ -79,10 +94,12 @@ function InsertarQR($codQR)
         
      
 }
+
 function Votar($voto,$idQR)
 {   
     $consultaSQL="  INSERT INTO votos( id_lista, idQR) VALUES ($voto,$idQR)";            
     $resultado=  EjecutarConsulta($consultaSQL);
+
 
      if (isset($resultado))
     {
@@ -95,6 +112,7 @@ function Votar($voto,$idQR)
          {     return false;}
      
 }
+
 function ObtenerResultadosVotos()
 {   
     
