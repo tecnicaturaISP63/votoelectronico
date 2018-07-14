@@ -46,6 +46,38 @@ function EjecutarConsulta($consultaSQL)
 
 }
 
+function EsAdministrador($idQR)
+{
+    $consultaSQL="SELECT * FROM `qr` WHERE idQR = $idQR AND administrador = 1";
+    $resultado = EjecutarConsulta($consultaSQL);
+    
+    if($resultado)
+    {
+        return $resultado->num_rows;
+    }
+    else
+    {
+        print "NO SE PUDO CONECTAR A LA BASE DE DATOS";
+    }
+}
+
+function InsertarRegistro($consultaSQL)
+{
+    $conexion = conectar();
+    
+    if($conexion->query($consultaSQL) === TRUE)
+    {
+        $UlcId = $conexion->insert_id;
+        return $UlcId;
+    }
+    else
+    {
+        echo "Error: " . $consultaSQL . "<br>" . $conexion->error;
+    }
+    
+    $conexion->close();
+}
+
 function ExisteQR($codQR)
 {
     
@@ -99,15 +131,32 @@ function Votar($voto,$idQR)
 {   
     $consultaSQL="  INSERT INTO votos( id_lista, idQR) VALUES ($voto,$idQR)";            
     $resultado=  EjecutarConsulta($consultaSQL);
+    print "Resultado:" . $resultado;
+     if (isset($resultado))
+    {
+            $consultaSQL=" UPDATE qr SET usado=1 WHERE idQR=$idQR";            
+            $resultado=  EjecutarConsulta($consultaSQL);
 
+     if (isset($resultado))
+            return true;    
+    }
+     else 
+         {     return false;}
+     
+}
 
+function ActualizarVoto($voto,$idQR)
+{   
+    $consultaSQL= "UPDATE votos SET id_lista = $voto WHERE id_lista = 0 AND idQR = $idQR";         
+    $resultado=  EjecutarConsulta($consultaSQL);
+    print "Resultado:" . $resultado;
      if (isset($resultado))
     {
             $consultaSQL=" UPDATE qr SET usado=1 WHERE idQR=$idQR";            
             $resultado=  EjecutarConsulta($consultaSQL);
 
             return true;    
-        }
+    }
      else 
          {     return false;}
      

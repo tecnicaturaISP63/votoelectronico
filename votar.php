@@ -1,18 +1,22 @@
 <script type="text/javascript">
 
 function confSubmit(form) {
-if (confirm("Esta Seguro de Votar?")) {
+form.votado.value = "true";
+console.log(form.votos["CHKLISTA"].value);
+form.submit();
+/*if (confirm("Esta Seguro de Votar?")) {
     form.votado.value = "true";
+    console.log(form.votos["CHKLISTA"].value);
     form.submit();
 }
 
 else {
 alert("Su voto todavia no se registro reintente!");
-}
+}*/
 }
 
 var t;
-var maximo = 60;
+var maximo = 30;
 function interval(){
     t=1;
     setInterval(function(){
@@ -108,15 +112,16 @@ if (!isset($_SESSION['QR']))
 </body>
 <?php
 	if (!is_null(filter_input(INPUT_POST,"CHKLISTA") ))
-{	$qrleido = filter_input(INPUT_POST,"hiddenqr");
-	//print "Su código es: " . $qrleido."<BR>";
-       $idqrleido = filter_input(INPUT_POST,"hiddenIDqr");
-	//print "Su ID es: " . $idqrleido."<BR>";
-        $listaVotada = filter_input(INPUT_POST,"CHKLISTA");
-        //print "Su ELECCION es: " . $listaVotada."<BR>";
-        
-        Votar($listaVotada, $idqrleido);
-}   
+        {	
+            $qrleido = filter_input(INPUT_POST,"hiddenqr");
+            //print "Su código es: " . $qrleido."<BR>";
+            $idqrleido = filter_input(INPUT_POST,"hiddenIDqr");
+            //print "Su ID es: " . $idqrleido."<BR>";
+            $listaVotada = filter_input(INPUT_POST,"CHKLISTA");
+            //print "Su ELECCION es: " . $listaVotada."<BR>";
+
+            ActualizarVoto($listaVotada, $idqrleido);
+        }   
  
 ?>
 <?php

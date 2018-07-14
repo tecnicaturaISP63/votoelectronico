@@ -14,7 +14,6 @@ function IniciarSesionQR($QR,$idQR)
     session_start();
     $_SESSION['QR']=$QR;
     $_SESSION['idQR']=$idQR;
-    
 }
 function CerrarSesion()
 {

@@ -29,20 +29,31 @@ require("funciones/sesiones.php");
 <?php
 	//Lector de codigos QR
 	if (!is_null(filter_input(INPUT_POST,"hiddenqr") ))
-{	$qrleido = filter_input(INPUT_POST,"hiddenqr");
-	print "Su código es: " . $qrleido;
-     
+        {	
+            $qrleido = filter_input(INPUT_POST,"hiddenqr");
+            print "Su código es: " . $qrleido;
 
-        //BUSCA QUE LOS DATOS COINCIDAN CON LOS QUE ESTAN EN LA BASE
 
-        $resultadoQR=ExisteQR($qrleido);
+            //BUSCA QUE LOS DATOS COINCIDAN CON LOS QUE ESTAN EN LA BASE
 
-        //SI ENCONTRO AL USUARIO EN LA BASE
-        if ($resultadoQR!=false)
-            {
-              
-                    IniciarSesionQR($qrleido,$resultadoQR);
-                     header ("Location:votar.php");
+            $resultadoQR=ExisteQR($qrleido);
+
+            //SI ENCONTRO AL USUARIO EN LA BASE
+            if ($resultadoQR!=false)
+                {
+                    if(EsAdministrador($resultadoQR))
+                    {
+                        print "Eres administrador";
+                        IniciarSesionQR($qrleido,$resultadoQR);
+                        header ("Location:administrador.php");
+                    }
+                    else
+                    {
+                        IniciarSesionQR($qrleido,$resultadoQR);
+                        //Se ingresa un voto en blanco
+                        Votar(0, $resultadoQR);
+                        header ("Location:votar.php");
+                    }
                 }
                 else
                   { 
@@ -52,7 +63,7 @@ require("funciones/sesiones.php");
                   }
             
         
-}
+        }
 
 
 ?>
