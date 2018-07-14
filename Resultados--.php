@@ -4,7 +4,6 @@
 include('funciones/sesiones.php');
 include('funciones/conexionBD.php');
 
-
 IniciarSesion();
 
 ?>
