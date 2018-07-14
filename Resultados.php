@@ -7,6 +7,17 @@ include('funciones/conexionBD.php');
 
 IniciarSesion();
 
+if (!isset($_POST['QR']) || !ExisteQR($_POST['QR']))
+{
+    CerrarSesion();
+}
+
+//print $_POST['QR'] . " ". $_POST['idQR'];
+
+unset($_POST['QR']);
+unset($_POST['idQR']);
+
+
 ?>
 <html>
     <head>
