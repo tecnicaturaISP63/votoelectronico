@@ -76,38 +76,40 @@ if (!isset($_SESSION['QR']))
 </sonido>
     <b><p id="centro"> Centro de Estudiante </p></b> <b><p id="instituto" align="right"> ISP  N° 63  Las  Toscas </p></b>
 <hr>
-<h2> <center> ELIGE A LA LISTA QUE DESEES VOTA</font> </center> </h2>
+<h2> <center> ELIGE A LA LISTA QUE DESEAS VOTAR</font> </center> </h2>
 <hr>
-<center> <table>
-    <tr>
-        <td> <center> <img src="imagenes/logo FE.png"> </img> </center> </td>
-    <td> <center> <img src="imagenes/logo ADE.png"> </img> </center> </td> 
-    <td> <center> <img src="imagenes/logo blanco.png"> </img> </center> </td> 		
-    </tr>
-</table> </center>
-<center> <table border=1 width="80%" bgcolor="white">
 
-  <?php      
-        print "<FORM action='votar.php' method='post' name='votos'>";
-       
+<?php      
+    print "<center> <table>";
+    print "<tr>";
+    $imagenes = ObtenerListas();
+    while($row = $imagenes->fetch_object())
+    {
+        print "<td> <center> <img src='$row->imagen'> </img> </center> </td>";
+    }
+    print "</tr>";
+    print "</table> </center>";
+    print "<center> <table border=1 width='80%' bgcolor='white'>";
   
-     
-           print "<tr>";
-        print "<td class='nomLista'> <input type='RADIO' name='CHKLISTA' value='1' required/> Fuerte Esperanza</td>";
-        print "<td class='nomLista'> <input type='RADIO' name='CHKLISTA' value='2' required/> Alianza Estudiantes</td>";
-        print "<td class='nomLista'> <input type='RADIO' name='CHKLISTA' value='0' required/> Voto en Blanco</td>";
-        print "</tr>";
+    print "<FORM action='votar.php' method='post' name='votos'>";
+    print "<tr>";
 
-        print "<input type='hidden' name='votado' value=false>";
-        print "<input id='hiddenIDqr' type='hidden' name='hiddenIDqr' value='".$_SESSION['idQR']."'>";
-        print "</table> </center>";
- 
-        print "<input id='codigo' type='hidden' name='hiddenqr' value='".$_SESSION['QR']."'>";
-        print " <center> <input type='submit' class='botonVotar' onClick='confSubmit(this.form);'  name='enviar' value ='VOTAR'> </center> ";        
+    $opciones = ObtenerListas();
+    while($row = $opciones->fetch_object())
+    {
+        print "<td class='nomLista'> <input type='RADIO' name='CHKLISTA' value='$row->id_lista' required/>$row->nombre</td>";
+    }
+
+    print "</tr>";
+    print "<input type='hidden' name='votado' value=false>";
+    print "<input id='hiddenIDqr' type='hidden' name='hiddenIDqr' value='".$_SESSION['idQR']."'>";
+    print "</table> </center>";
+
+    print "<input id='codigo' type='hidden' name='hiddenqr' value='".$_SESSION['QR']."'>";
+    print " <center> <input type='submit' class='botonVotar' onClick='confSubmit(this.form);'  name='enviar' value ='VOTAR'> </center> ";        
+
+    print "</FORM>";
         
-        print "</FORM>";
-        
-      
 ?> 
 </body>
 <?php

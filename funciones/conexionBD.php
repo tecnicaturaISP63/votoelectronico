@@ -154,12 +154,30 @@ function ObtenerResultadosVotos()
     $consultaSQL="  SELECT l.id_lista ,nombre as Lista, count(v.id_lista)as 'Votos' FROM votos  v, listas l where v.id_lista=l.id_lista group by  l.id_lista";            
     $resultado=  EjecutarConsulta($consultaSQL);
 
-     if (isset($resultado))
+    if (isset($resultado))
     {
 
-            return $resultado;    
-        }
-     else 
-         {     return false;}
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
      
+}
+
+function ObtenerListas()
+{
+    $consultaSQL = "SELECT * FROM listas ORDER BY id_lista DESC";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
 }
