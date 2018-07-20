@@ -181,3 +181,64 @@ function ObtenerListas()
         return false;
     }
 }
+
+function VotacionHabilitada()
+{
+    $consultaSQL = "SELECT habilitado FROM eleccion WHERE nombre = 'prueba'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        $habilitado = $resultado->fetch_object();
+        return $habilitado->habilitado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function IniciarCerrarVotacion($habilitarVot)
+{
+    $consultaSQL = "UPDATE eleccion SET habilitado = $habilitarVot WHERE nombre = 'prueba'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function LimpiarVotos()
+{
+    $consultaSQL = "TRUNCATE TABLE votos";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function ReiniciaQR()
+{
+    $consultaSQL = "UPDATE qr SET usado = 0";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}

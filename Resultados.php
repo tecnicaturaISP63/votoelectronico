@@ -17,6 +17,26 @@ if (!isset($_POST['QR']) || !ExisteQR($_POST['QR']))
 unset($_POST['QR']);
 unset($_POST['idQR']);
 
+//Iniciamos ocerramos las votaciones
+if(isset($_POST["habilitar"]))
+{
+    $habilitarVot = $_POST["habilitar"];
+    
+    if($habilitarVot == 1)
+    {
+        LimpiarVotos();
+        ReiniciaQR();
+        print "Votación iniciada";
+    }
+    else
+    {
+        print "Votación cerrada";
+    }
+    
+    IniciarCerrarVotacion($habilitarVot);
+}
+
+unset($_POST["habilitar"]);
 
 ?>
 <html>
