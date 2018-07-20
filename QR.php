@@ -31,37 +31,42 @@ require("funciones/sesiones.php");
 	if (!is_null(filter_input(INPUT_POST,"hiddenqr") ))
         {	
             $qrleido = filter_input(INPUT_POST,"hiddenqr");
-            print "Su código es: " . $qrleido;
-
-
+            print "Su código es: " . $qrleido . " ". VotacionHabilitada();
             //BUSCA QUE LOS DATOS COINCIDAN CON LOS QUE ESTAN EN LA BASE
 
             $resultadoQR=ExisteQR($qrleido);
 
+            //Comprueba si la votacion esta habilitada
+            
             //SI ENCONTRO AL USUARIO EN LA BASE
             if ($resultadoQR!=false)
+            {
+                IniciarSesionQR($qrleido,$resultadoQR);
+
+                if(EsAdministrador($resultadoQR))
                 {
                     IniciarSesionQR($qrleido,$resultadoQR);
-                    
-                    if(EsAdministrador($resultadoQR))
-                    {
-                        //IniciarSesionQR($qrleido,$resultadoQR);
-                        header ("Location:administrador.php");
-                    }
-                    else
-                    {
-                        //IniciarSesionQR($qrleido,$resultadoQR);
-                        //Se ingresa un voto en blanco
-                        Votar(0, $resultadoQR);
-                        header ("Location:votar.php");
-                    }
+                    header ("Location:administrador.php");
+                }
+                else if(VotacionHabilitada() == 1)
+                {
+                    IniciarSesionQR($qrleido,$resultadoQR);
+                    //Se ingresa un voto en blanco
+                    Votar(0, $resultadoQR);
+                    header ("Location:votar.php");
                 }
                 else
-                  { 
-                      /* REDIRECCIONAMOS PARA VOLVER AL LOGIN*/
-                    PRINT "NO ES CORRECTO"; 
+                { 
+                    /* REDIRECCIONAMOS PARA VOLVER AL LOGIN*/
                     header ("Location:qr.php");
-                  }
+                }
+            }
+            else
+            { 
+                /* REDIRECCIONAMOS PARA VOLVER AL LOGIN*/
+                PRINT "NO ES CORRECTO"; 
+                header ("Location:qr.php");
+            }
             
         
         }
