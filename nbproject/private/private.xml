@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/VotoElectronico/administrador.php</file>
             <file>file:/C:/xampp/htdocs/VotoElectronico/QR.php</file>
-            <file>file:/C:/xampp/htdocs/VotoElectronico/CSS/votar.css</file>
-            <file>file:/C:/xampp/htdocs/VotoElectronico/funciones/conexionBD.php</file>
+            <file>file:/C:/xampp/htdocs/VotoElectronico/administrador.php</file>
+            <file>file:/C:/xampp/htdocs/VotoElectronico/cargareleccion.php</file>
+            <file>file:/C:/xampp/htdocs/VotoElectronico/CSS/admin.css</file>
+            <file>file:/C:/xampp/htdocs/VotoElectronico/cargarlista.php</file>
             <file>file:/C:/xampp/htdocs/VotoElectronico/votar.php</file>
             <file>file:/C:/xampp/htdocs/VotoElectronico/Resultados.php</file>
         </group>
