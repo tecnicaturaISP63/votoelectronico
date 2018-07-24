@@ -182,9 +182,9 @@ function ObtenerListas()
     }
 }
 
-function VotacionHabilitada()
+function VotacionHabilitada($idEleccion)
 {
-    $consultaSQL = "SELECT habilitado FROM eleccion WHERE nombre = 'prueba'";
+    $consultaSQL = "SELECT habilitado FROM eleccion WHERE idEleccion = $idEleccion";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
@@ -198,9 +198,9 @@ function VotacionHabilitada()
     }
 }
 
-function IniciarCerrarVotacion($habilitarVot)
+function IniciarCerrarVotacion($habilitarVot, $idEleccion)
 {
-    $consultaSQL = "UPDATE eleccion SET habilitado = $habilitarVot WHERE nombre = 'prueba'";
+    $consultaSQL = "UPDATE eleccion SET habilitado = $habilitarVot WHERE idEleccion = $idEleccion";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
@@ -231,6 +231,37 @@ function LimpiarVotos()
 function ReiniciaQR()
 {
     $consultaSQL = "UPDATE qr SET usado = 0";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function InsertarEleccion($nombre, $fecha)
+{
+    $consultaSQL = "INSERT INTO eleccion (nombre, fecha) VALUES ('$nombre', '$fecha')";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function InsertarLista($nombre, $urlImagen)
+{
+    //INSERT INTO listas (nombre, imagen) VALUES ('Ivan', 'Mangrullo4.jpg')
+    $consultaSQL = "INSERT INTO listas (nombre, imagen) VALUES ('$nombre', '$urlImagen')";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
