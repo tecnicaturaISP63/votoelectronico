@@ -91,7 +91,7 @@
                         //El primer argumento es el texto a convertirse a QR
                         //El segundo agumento es el nombre del archivo a guardarse. (La imagen se guada automaticamente en .png)
 
-                        QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
+                        QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 5); 
                         //muestro la imagen
                         print '<td><img src="'.$PNG_WEB_DIR.basename($filename).'" /><br/></td>';  
                     }
