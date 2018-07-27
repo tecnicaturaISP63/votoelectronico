@@ -13,6 +13,11 @@
 
     </head>
 <body>
+    
+    <hr>
+        <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
+        <a>Lector QR</a>
+    <hr>
     <!--Mensaje sobre el estado del escaner-->
     <h1 id="mensaje">Coloque el código QR frente a la cámara.</h1>
     <!--Cuadrado donde va a aparecer lo que recibe la camara -->
@@ -23,18 +28,17 @@
             <input id="codigo" type="hidden" name="hiddenqr" value="a">
         </form>
     </div>
-    <img src="Imagenes/logo.png" style="width: 150px; height: 150px;">
 </body>
     <?php
         //Lector de codigos QR
         if (!is_null(filter_input(INPUT_POST,"hiddenqr") ))
         {	
             $qrleido = filter_input(INPUT_POST,"hiddenqr");
-            print "Su código es: " . $qrleido . " ". VotacionHabilitada(1);
             //BUSCA QUE LOS DATOS COINCIDAN CON LOS QUE ESTAN EN LA BASE
 
             $resultadoQR=ExisteQR($qrleido);
-
+            $idEleccion = IdEleccionQr($qrleido);
+            print "test" . $idEleccion;
             //Comprueba si la votacion esta habilitada
 
             //SI ENCONTRO AL USUARIO EN LA BASE
@@ -47,11 +51,11 @@
                     IniciarSesionQR($qrleido,$resultadoQR);
                     header ("Location:administrador.php");
                 }
-                else if(VotacionHabilitada(1) == 1)
+                else if(VotacionHabilitada($idEleccion) == 1)
                 {
                     IniciarSesionQR($qrleido,$resultadoQR);
                     //Se ingresa un voto en blanco
-                    Votar(0, $resultadoQR);
+                    Votar(0, $resultadoQR, $idEleccion);
                     header ("Location:votar.php");
                 }
                 else

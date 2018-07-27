@@ -51,7 +51,7 @@ function EjecutarConsulta($consultaSQL)
 
 function EsAdministrador($idQR)
 {
-    $consultaSQL="SELECT * FROM `qr` WHERE idQR = $idQR AND administrador = 1";
+    $consultaSQL="SELECT * FROM qr WHERE idQR = $idQR AND administrador = 1";
     $resultado = EjecutarConsulta($consultaSQL);
     
     if($resultado)
@@ -67,20 +67,47 @@ function EsAdministrador($idQR)
 function ExisteQR($codQR)
 {
     
-    $consultaSQL=" SELECT idQR FROM qr WHERE QRcodigo='$codQR' and usado=false";
-    $resultado=  EjecutarConsulta($consultaSQL);
+    $consultaSQL="SELECT idQR FROM qr WHERE QRcodigo='$codQR' and usado=false";
+    $resultado = EjecutarConsulta($consultaSQL);
 
-     if (isset($resultado))
+    if (isset($resultado))
     {
         //VERIFICO SI ENCONTRO DATOS
-        $fila=$resultado->fetch_object();
-        if (isset($fila->idQR)){
+        $fila = $resultado->fetch_object();
+        if (isset($fila->idQR))
+        {
             return $fila->idQR;    
         }
-     else {     return false;}
-        }
+        else 
+        {     return false;
         
+        }
+    }
+}
 
+function IdEleccionQr($codQR)
+{
+    //;
+    $consultaSQL="SELECT idEleccion FROM qr WHERE QRcodigo = '$codQR'";
+    $resultado = EjecutarConsulta($consultaSQL);
+
+    if (isset($resultado))
+    {
+        //VERIFICO SI ENCONTRO DATOS
+        $fila = $resultado->fetch_object();
+        if (isset($fila->idEleccion))
+        {
+            return $fila->idEleccion;    
+        }
+        else 
+        {     return 0;
+        
+        }
+    }
+    else
+    {
+        return false;
+    }
 }
 
 function ObtenerPadron()
@@ -97,10 +124,10 @@ function ObtenerPadron()
 
 }
 
-function InsertarQR($codQR)
+function InsertarQR($codQR, $idEleccion)
 {
     
-    $consultaSQL=" INSERT INTO qr (QRcodigo,usado,administrador) values ('$codQR', 0, 0)";
+    $consultaSQL="INSERT INTO qr (QRcodigo,usado,administrador, idEleccion) values ('$codQR', 0, 0, $idEleccion)";
     $resultado=  EjecutarConsulta($consultaSQL);
 
 
@@ -113,9 +140,9 @@ function InsertarQR($codQR)
      
 }
 
-function Votar($voto,$idQR)
+function Votar($voto,$idQR, $idEleccion)
 {   
-    $consultaSQL="  INSERT INTO votos( id_lista, idQR) VALUES ($voto,$idQR)";            
+    $consultaSQL="INSERT INTO votos (id_lista, idEleccion, idQR) VALUES ($voto, $idEleccion, $idQR);";            
     $resultado=  EjecutarConsulta($consultaSQL);
     print "Resultado:" . $resultado;
      if (isset($resultado))
@@ -148,10 +175,10 @@ function ActualizarVoto($voto,$idQR)
      
 }
 
-function ObtenerResultadosVotos()
+function ObtenerResultadosVotos($idEleccion)
 {   
     
-    $consultaSQL="  SELECT l.id_lista ,nombre as Lista, count(v.id_lista)as 'Votos' FROM votos  v, listas l where v.id_lista=l.id_lista group by  l.id_lista";            
+    $consultaSQL="SELECT l.id_lista, nombre as Lista, count(v.id_lista) as 'Votos' FROM votos v, listas l where v.id_lista=l.id_lista and l.idEleccion = $idEleccion group by l.id_lista";            
     $resultado=  EjecutarConsulta($consultaSQL);
 
     if (isset($resultado))
@@ -168,7 +195,54 @@ function ObtenerResultadosVotos()
 
 function ObtenerListas()
 {
-    $consultaSQL = "SELECT * FROM listas ORDER BY id_lista DESC";
+    $consultaSQL = "SELECT listas.* FROM listas JOIN eleccion on listas.idEleccion = eleccion.idEleccion WHERE eleccion.habilitado = 1 ORDER BY id_lista DESC";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function ObtenerElecciones()
+{
+    $consultaSQL = "SELECT * FROM eleccion ORDER BY idEleccion ASC";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function ObtenerEleccion($idEleccion)
+{
+    $consultaSQL = "SELECT * FROM eleccion WHERE idEleccion = $idEleccion";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+function ObtenerCantidadQr($idEleccion)
+{
+    $consultaSQL = "SELECT COUNT(QRcodigo) AS cantidad FROM qr WHERE idEleccion = $idEleccion";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
@@ -186,11 +260,28 @@ function VotacionHabilitada($idEleccion)
 {
     $consultaSQL = "SELECT habilitado FROM eleccion WHERE idEleccion = $idEleccion";
     
+    print $idEleccion;
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
     {
         $habilitado = $resultado->fetch_object();
         return $habilitado->habilitado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function ObtenerEleccionHabilitada()
+{
+    $consultaSQL = "SELECT * FROM eleccion WHERE habilitado = 1";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+
+        return $resultado;    
     }
     else 
     {
@@ -213,9 +304,32 @@ function IniciarCerrarVotacion($habilitarVot, $idEleccion)
     }
 }
 
-function LimpiarVotos()
+function CerrarVotacion()
 {
-    $consultaSQL = "TRUNCATE TABLE votos";
+    $consultaSQL = "SELECT * FROM eleccion WHERE habilitado = 1";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        $row=$resultado->fetch_object();
+        if(isset($row->idEleccion))
+        {
+            $idEleccion = $row->idEleccion;
+            IniciarCerrarVotacion(0, $idEleccion);
+            return $idEleccion;
+        }
+        return 0;
+        
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function LimpiarVotos($idEleccion)
+{
+    $consultaSQL = "DELETE FROM votos WHERE idEleccion = $idEleccion";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
@@ -228,14 +342,30 @@ function LimpiarVotos()
     }
 }
 
-function ReiniciaQR()
+function ReiniciaQR($idEleccion)
 {
-    $consultaSQL = "UPDATE qr SET usado = 0";
+    $consultaSQL = "UPDATE qr SET usado = 0 WHERE idEleccion = $idEleccion";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
     {
         return true;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function ObtenerIdEleccion($nombre)
+{
+    $consultaSQL = "SELECT * FROM eleccion WHERE nombre = '$nombre'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        $row=$resultado->fetch_object();
+        return $row->idEleccion;    
     }
     else 
     {
@@ -250,6 +380,8 @@ function InsertarEleccion($nombre, $fecha)
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
     {
+        $idEleccion = ObtenerIdEleccion($nombre);
+        InsertarLista("Voto en Blanco", "logo blanco.png", $idEleccion);
         return true;    
     }
     else 
@@ -258,10 +390,10 @@ function InsertarEleccion($nombre, $fecha)
     }
 }
 
-function InsertarLista($nombre, $urlImagen)
+function InsertarLista($nombre, $urlImagen, $idEleccion)
 {
     //INSERT INTO listas (nombre, imagen) VALUES ('Ivan', 'Mangrullo4.jpg')
-    $consultaSQL = "INSERT INTO listas (nombre, imagen) VALUES ('$nombre', '$urlImagen')";
+    $consultaSQL = "INSERT INTO listas (nombre, imagen, idEleccion) VALUES ('$nombre', '$urlImagen', $idEleccion)";
     
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
