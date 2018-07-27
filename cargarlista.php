@@ -2,8 +2,7 @@
     <head>
        <title>Generador de QR</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="CSS/generarqr.css">
-        <link href="C:\Users\bangho\Desktop\generarqr" rel="stylesheet"> 
+        <link rel="stylesheet" href="CSS/admin.css"> 
     </head>
     
     <body>
@@ -27,27 +26,53 @@
             unset($_POST['QR']);
             unset($_POST['idQR']);
         ?>
-        <div class="botones">
-            <div><a>Cargar una nueva lista</a></div>
-            <form action='cargarlista.php' method='post'>
-                <?php
-                    //Con esto podemos colocar varias listas sin tener que ingresar el codigo nuevamente
-                    print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
-                    print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                ?>
-		<div><input type ="text" name="nombre" align="center" placeholder="Nombre de lista" required></div>
-		<div><input type ="text" name="url" placeholder="Url del logo" required></div>
-                <div><input type="submit" value="Cargar lista" id="boton" class="btnff6"></div>
-            </form>
-        </div>
-        <img src="Imagenes/logo.png" style="width: 150px; height: 150px;">
+        <hr>
+            <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
+            <a>Cargar lista</a>
+        <hr>
         <?php
-            if(isset($_POST["nombre"]) && isset($_POST["url"]))
+            if(isset($_POST["nombre"]) && isset($_POST["url"]) && isset($_POST["eleccion"]))
             {
-                InsertarLista($_POST["nombre"], $_POST["url"]);
+                if(InsertarLista($_POST["nombre"], $_POST["url"], $_POST["eleccion"]))
+                {
+                    print "<div id='cuadro'>";
+                    print "<p id='alerta'>Lista cargada</p>";
+                    print "</div>";
+                }
+                else
+                {
+                    print "<div id='cuadroR'>";
+                    print "<p id='alertaR'>Hubo un error al cargar la lista</p>";
+                    print "</div>";
+                }
+                unset($_POST["eleccion"]);
                 unset($_POST["nombre"]);
                 unset($_POST["url"]);
             }
         ?>
+        <div class="botones">
+            <div id="centrar">
+                <a>Cargar una nueva lista</a>
+                <form action='cargarlista.php' method='post'>
+                    <?php
+                        //Con esto podemos colocar varias listas sin tener que ingresar el codigo nuevamente
+                        print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
+                        print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
+                        
+                        $listaElecciones = ObtenerElecciones();
+                        print "<select name='eleccion' required>";
+                        print "<option value='' selected disabled hidden>Elija la elección</option>";
+                        while ($row=$listaElecciones->fetch_object())
+                        {
+                            print "<option value='$row->idEleccion'>$row->nombre</option>";
+                        }
+                        print "</select>";
+                    ?>
+                    <input class="data" type ="text" name="nombre" align="center" placeholder="Nombre de lista" required>
+                    <input class="data" type ="text" name="url" placeholder="Url del logo" required>
+                    <input type="submit" value="Cargar lista" id="boton" class="btnff6">
+                </form>
+            </div>
+        </div>
     </body>
 </html>
