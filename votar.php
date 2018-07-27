@@ -15,28 +15,33 @@
     alert("Su voto todavia no se registro reintente!");
     }*/
     }
+    
+    
 
     var t;
-    var maximo = 30;
+    var maximo = 2;
     function interval(){
         t=1;
         setInterval(function(){
             //document.getElementById("test").innerHTML = t;
             if(t >= maximo)
             {
-                document.votos["CHKLISTA"].value = "0";
-                document.votos.votado.value = "true";
+                //document.votos["CHKLISTA"].value = "0";
+                //document.votos.votado.value = "true";
                 //document.votos.submit();
 
                 var audio = new Audio('sonidos/votado.mp3');
                 audio.play();
                 audio.onended = function () 
                 {
-                    console.log("listo");
+                    var votoBlanco = document.getElementById("Voto en Blanco");
+                    
+                    document.votos["CHKLISTA"].value = votoBlanco.value;
+                    document.votos.votado.value = "true";
                     document.votos.submit();
                 }
             }
-            console.log(t);
+            //console.log(t);
             t++;
         },1000,"JavaScript");
     }
@@ -75,6 +80,10 @@
         <sonido id="sonido">
             <source src="sonidos/votado.mp3" type="audio/mpeg">
         </sonido>
+        <hr>
+            <img id="logo" src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
+            <a>Bienvenido administrador</a>
+        <hr>
         <b><p id="centro"> Centro de Estudiante </p></b> <b><p id="instituto" align="right"> ISP  N° 63  Las  Toscas </p></b>
         <hr>
         <h2> <center> ELIGE A LA LISTA QUE DESEAS VOTAR</font> </center> </h2>
@@ -91,7 +100,7 @@
                 print "<td class='nomLista'>";
                 print "<label class='checkeable'>";
                 print "<center>"; //</td>
-                print "<input class='circulo' type='RADIO' name='CHKLISTA' value='$row->id_lista' required/>$row->nombre";
+                print "<input class='circulo' id='$row->nombre' type='RADIO' name='CHKLISTA' value='$row->id_lista' required/>$row->nombre";
                 print "<img src='imagenes/$row->imagen'></img>";
                 print "</center>";
                 print "</label>";
@@ -120,8 +129,7 @@
 
             print "</FORM>";
 
-        ?> 
-        <img src="Imagenes/logo.png" style="width: 150px; height: 150px;">
+        ?>
     </body>
     <?php
             if (!is_null(filter_input(INPUT_POST,"CHKLISTA") ))
