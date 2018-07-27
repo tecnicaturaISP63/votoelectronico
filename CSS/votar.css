@@ -69,3 +69,18 @@ img {
 {
     border-color: #afd9ee;
 }
+
+a{ 
+    color: white; 
+    text-decoration: none;
+    font-family: 'lato', georgia;
+    font-size:25px; 
+}
+
+a:hover { 
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8); 
+}
+
+#logo{
+    float: left;
+}

@@ -1,27 +1,46 @@
 body { 
 	
-    margin-top: 30px; 
+    margin-top: 20px; 
     font-family: 'lato', georgia;
     font-size:25px; 
     background-color: #2c3e50;
 }
 
 .botones { 
-    margin-top: 50px; 
+    margin-top: 30px; 
 }
 
-.botones div {
+.botones #centrar {
     width: 10em;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
 }
 
-input {
-    width: 12em;
-    padding: 1em;
+input{
+    margin-top: 20px;
+    width: 10em;
+    padding: 0.5em;
     color:#ffffff;
     font-size: 24px;
+}
+.data
+{
+    color: black;
+}
+
+#eleccion
+{
+    width: 20em;
+}
+
+select {
+    margin-top: 20px;
+    width: 10em;
+    padding: 0.5em;
+    font-size: 24px;
+    color: white;
+    background-color: #2c3e50;
 }
 
 .btnff6 {
@@ -31,7 +50,7 @@ input {
 }
 
 
-a { 
+a, .title, #totalVotos, #totalqr, .blanco, #total { 
     color: white; 
     text-decoration: none; 
 }
@@ -50,3 +69,45 @@ div, input{
     transform: scale(1.5); 
 }
 
+img{
+    float: left;
+}
+
+#totalVotos, #totalqr
+{
+    margin-top: 5px;
+}
+
+#cuadro
+{
+    width: 80%;
+    height: 5%;
+    background-color: #65edb0;
+    margin-left: 15%;
+    border: 5px solid #378462;
+}
+
+#alerta
+{
+    color: #378462;
+    font-size: 90%;
+    text-align: center;
+    margin-top: 0.5%;
+}
+
+#cuadroR
+{
+    width: 80%;
+    height: 5%;
+    background-color: #e86666;
+    margin-left: 15%;
+    border: 5px solid #934949;
+}
+
+#alertaR
+{
+    color: #934949;
+    font-size: 90%;
+    text-align: center;
+    margin-top: 0.5%;
+}
