@@ -21,6 +21,10 @@
     </head>
     
     <body>
+        <hr>
+            <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
+            <a>Bienvenido administrador</a>
+        <hr>
         <div class="botones">
             <?php
 
@@ -32,42 +36,49 @@
                 unset($_SESSION['idQR']);
 
                 //print "Bienvenido administrador " . $qrleido . " " . $idQr;
-                
+                print "<div id='centrar'>";
                 print "<form action='cargareleccion.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                print "<div><input type='submit' value='Cargar Eleccion' class='btnff6'></div>";
+                print "<input type='submit' value='Cargar Elección' class='btnff6'>";
                 print "</form>";
                 
                 print "<form action='cargarlista.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                print "<div><input type='submit' value='Cargar Listas' class='btnff6'></div>";
+                print "<input type='submit' value='Cargar Listas' class='btnff6'>";
                 print "</form>";
                 
                 print "<form action='QRgenerar.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                print "<div><input type='submit' value='Generar QR' class='btnff6'></div>";
+                print "<input type='submit' value='Generar QR' class='btnff6'>";
                 print "</form>";
                 
-                print "<form action='resultados.php' method='post'>";
+                print "<form action='vereleccion.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                print "<input id='codigo' type='hidden' name='habilitar' value=1>";
-                print "<div><input type='submit' value='Iniciar votacion' class='btnff6'></div>";
+                print "<input type='submit' value='Ver elección' class='btnff6'>";
+                print "</form>";
+                
+                print "<form action='iniciarvotacion.php' method='post'>";
+                print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
+                print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
+                print "<input type='submit' value='Iniciar votación' class='btnff6'>";
                 print "</form>";
                 
                 print "<form action='resultados.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
                 print "<input id='codigo' type='hidden' name='habilitar' value=0>";
-                print "<div><input type='submit' value='Cierre y Resultado' class='btnff6'></div>";
+                print "<input type='submit' value='Cierre y Resultado' class='btnff6'>";
                 print "</form>";
-
                 
+                print "<form action='qr.php' method='post'>";
+                print "<input type='submit' value='Cerrar Sesión' class='btnff6'>";
+                print "</form>";
+                print "</div>";
             ?>
         </div>
-        <img src="Imagenes/logo.png" style="width: 150px; height: 150px;">
     </body>
 </html>
