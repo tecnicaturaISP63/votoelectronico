@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>GENERAR QR </title>
-        <link rel="stylesheet" href="CSS/generarqr.css">
+        <link rel="stylesheet" href="CSS/admin.css">
         
         <?php
             require ("generadorQR/phpqrcode/qrlib.php"); 
@@ -27,30 +27,42 @@
         ?>
     </head>
 <body>
-
+    <hr>
+        <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
+        <a>Cargar QR</a>
+    <hr>
     <!--Mensaje sobre el estado del escaner-->
     <div class="botones">
         <!--<h1 id="mensaje">Cantidad a generar</h1>-->
-        <div><a id="mensaje">Cantidad a generar</a></div>
-        <form   action="QRgenerar.php" method="post">
-            <?php
-                print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
-                print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-            ?>
-            <div><input id="data" type="text"  name="txtcantidad" len="10" value="" required></div>
-            <div><input type="submit" name="Generar" value="Generar" id="boton" class="btnff6"></div>
-        </form>
+        <div id="centrar">
+            <a id="mensaje">Cantidad a generar</a>
+            <form   action="QRgenerar.php" method="post">
+                <?php
+                    print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
+                    print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
+                    $listaElecciones = ObtenerElecciones();
+                    print "<select name='eleccion' required>";
+                    print "<option value='' selected disabled hidden>Elija la elección</option>";
+                    while ($row=$listaElecciones->fetch_object())
+                    {
+                        print "<option value='$row->idEleccion'>$row->nombre</option>";
+                    }
+                    print "</select>";
+                ?>
+                <input class="data" type="text"  name="txtcantidad" value="" required>
+                <input type="submit" name="Generar" value="Generar" id="boton" class="btnff6">
+            </form>
+        </div>
     </div>
-    <img src="Imagenes/logo.png" style="width: 150px; height: 150px;">
 </body>
     <?php
 
 
         //GENERADOR
-
-        if (!is_null(filter_input(INPUT_POST,'txtcantidad')))
+        if (!is_null(filter_input(INPUT_POST,'txtcantidad')) && !is_null(filter_input(INPUT_POST,'eleccion')))
         {    
            $cantidad=filter_input(INPUT_POST,'txtcantidad');
+           $idEleccion = filter_input(INPUT_POST,'eleccion');
 
 
             //set it to writable location, a place for temp generated PNG files
@@ -86,7 +98,7 @@
                    {
                         $generados++;
                         $data=generarCodigo(20);
-                        InsertarQR($data);
+                        InsertarQR($data, $idEleccion);
                         $filename = $PNG_TEMP_DIR.''.$data.'.png';
                         //El primer argumento es el texto a convertirse a QR
                         //El segundo agumento es el nombre del archivo a guardarse. (La imagen se guada automaticamente en .png)
