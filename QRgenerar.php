@@ -49,8 +49,11 @@
                     }
                     print "</select>";
                 ?>
-                <input class="data" type="text"  name="txtcantidad" value="" required>
+                <input class="data" type="text"  name="txtcantidad" value="" placeholder="Cantidad" required>
                 <input type="submit" name="Generar" value="Generar" id="boton" class="btnff6">
+            </form>
+            <form action='qr.php' method='post'>
+                <input type='submit' value='Salir' class='btnff6'>
             </form>
         </div>
     </div>

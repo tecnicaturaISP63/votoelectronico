@@ -52,6 +52,9 @@
                     ?>
                     <input type="submit" value="Iniciar votación" id="boton" class="btnff6" align="center">
                 </form>
+                <form action='qr.php' method='post'>
+                    <input type='submit' value='Salir' class='btnff6'>
+                </form>
             </div>
         </div>
     </body>

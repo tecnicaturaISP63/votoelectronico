@@ -19,7 +19,7 @@
     
 
     var t;
-    var maximo = 2;
+    var maximo = 30;
     function interval(){
         t=1;
         setInterval(function(){

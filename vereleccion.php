@@ -1,6 +1,6 @@
 <html>
     <head>
-       <title>Iniciar votación</title>
+       <title>Ver una elección</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="CSS/admin.css">
         <link href="C:\Users\bangho\Desktop\generarqr" rel="stylesheet"> 
@@ -50,7 +50,10 @@
                         }
                         print "</select>";
                     ?>
-                    <input type="submit" value="Iniciar votación" id="boton" class="btnff6" align="center">
+                    <input type="submit" value="Ver elección" id="boton" class="btnff6" align="center">
+                </form>
+                <form action='qr.php' method='post'>
+                    <input type='submit' value='Salir' class='btnff6'>
                 </form>
             </div>
         </div>

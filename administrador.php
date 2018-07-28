@@ -75,7 +75,7 @@
                 print "</form>";
                 
                 print "<form action='qr.php' method='post'>";
-                print "<input type='submit' value='Cerrar Sesión' class='btnff6'>";
+                print "<input type='submit' value='Salir' class='btnff6'>";
                 print "</form>";
                 print "</div>";
             ?>

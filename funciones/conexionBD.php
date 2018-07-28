@@ -260,7 +260,6 @@ function VotacionHabilitada($idEleccion)
 {
     $consultaSQL = "SELECT habilitado FROM eleccion WHERE idEleccion = $idEleccion";
     
-    print $idEleccion;
     $resultado=  EjecutarConsulta($consultaSQL);
     if (isset($resultado))
     {

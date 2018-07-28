@@ -1,6 +1,6 @@
 <html>
     <head>
-       <title>Generador de QR</title>
+       <title>Cargar Lista</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="CSS/admin.css"> 
     </head>
@@ -69,8 +69,11 @@
                         print "</select>";
                     ?>
                     <input class="data" type ="text" name="nombre" align="center" placeholder="Nombre de lista" required>
-                    <input class="data" type ="text" name="url" placeholder="Url del logo" required>
+                    <input class="data" type ="text" name="url" placeholder="Nombre de imagen" required>
                     <input type="submit" value="Cargar lista" id="boton" class="btnff6">
+                </form>
+                <form action='qr.php' method='post'>
+                    <input type='submit' value='Salir' class='btnff6'>
                 </form>
             </div>
         </div>

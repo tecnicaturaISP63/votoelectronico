@@ -35,13 +35,25 @@
             {
                 $idEleccion = $_POST["eleccion"];
             }
+            
+            //Verificar si la votacion esta habilitada
+            $iniciada = VotacionHabilitada($idEleccion);
+            
             $eleccionHabilitada = ObtenerEleccionHabilitada();
             $row=$eleccionHabilitada->fetch_object();
-            if(isset($row->idEleccion))
+            if(isset($row->idEleccion) && !$iniciada 
+                    && isset($_POST["habilitar"]) && $_POST["habilitar"])
             {
                 print "<div id='cuadroR'>";
                 print "<p id='alertaR'>Ya hay una elección en curso, cierre dicha elección antes de iniciar otra.</p>";
                 print "</div>";
+            }
+            else if ($iniciada)
+            {
+                print "<div id='cuadroR'>";
+                print "<p id='alertaR'>Esta elección esta en curso, no puedes ver su información.</p>";
+                print "</div>";
+                $idEleccion = 0;
             }
             else
             {
@@ -62,11 +74,20 @@
             
             $eleccion = ObtenerEleccion($idEleccion);
             $row=$eleccion->fetch_object();
+            
+            $nombreElec = "";
+            $fechaElec = "";
+            
+            if(isset($row->nombre))
+            {
+                $nombreElec = $row->nombre;
+                $fechaElec = $row->fecha;
+            }
 
             print "<h4 class='title'>Padron Electroral ISP Nº 63</h3>";
-            print "<h4 class='title'>Elección: $row->nombre</h3>";
+            print "<h4 class='title'>Elección: $nombreElec</h3>";
             print "<hr>";
-            print "<h5 id='totalVotos'>Fecha: $row->fecha</h5>";
+            print "<h5 id='totalVotos'>Fecha: $fechaElec</h5>";
             
             print "<div style='overflow: auto; width: 100%;  height: 70%;'>";
             print '<table border="1" width="70%" style="margin-left: 50px;" cellspacing="0" cellpadding="5">'
@@ -74,7 +95,6 @@
                               .'<td><p class="blanco">Lista</p></td>'
                               .'<td><p class="blanco">Votos</p></td></tr>';
 
-            $idEleccion = $row->idEleccion;
             $ObjListado=ObtenerResultadosVotos($idEleccion);
             $cant=0;
             while ($row=$ObjListado->fetch_object()) // recorre los  es uno por uno hasta el fin de la tabla

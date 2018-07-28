@@ -72,6 +72,9 @@
                     <input class="data" type ="date" name="fecha" placeholder="Fecha de elección">
                     <input type="submit" value="Cargar elección" id="boton" class="btnff6">
                 </form>
+                <form action='qr.php' method='post'>
+                    <input type='submit' value='Salir' class='btnff6'>
+                </form>
             </div>
         </div>
     </body>
