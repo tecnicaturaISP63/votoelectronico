@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2018 a las 17:48:15
+-- Tiempo de generación: 30-07-2018 a las 21:36:27
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 5.6.31
 
@@ -1326,7 +1326,7 @@ ALTER TABLE `listas`
 -- AUTO_INCREMENT de la tabla `qr`
 --
 ALTER TABLE `qr`
-  MODIFY `idQR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1243;
+  MODIFY `idQR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1242;
 --
 -- AUTO_INCREMENT de la tabla `votos`
 --
