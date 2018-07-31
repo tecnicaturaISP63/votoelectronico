@@ -23,7 +23,7 @@
     <body>
         <hr>
             <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
-            <a>Bienvenido administrador</a>
+            <a>Panel de administración</a>
         <hr>
         <div class="botones">
             <?php
