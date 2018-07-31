@@ -64,7 +64,7 @@
                 print "<form action='iniciarvotacion.php' method='post'>";
                 print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
                 print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
-                print "<input type='submit' value='Iniciar votación' class='btnff6'>";
+                print "<input type='submit' value='Iniciar elección' class='btnff6'>";
                 print "</form>";
                 
                 print "<form action='resultados.php' method='post'>";

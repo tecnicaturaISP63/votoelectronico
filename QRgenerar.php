@@ -29,7 +29,7 @@
 <body>
     <hr>
         <img src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
-        <a>Cargar QR</a>
+        <a>Generar QR</a>
     <hr>
     <!--Mensaje sobre el estado del escaner-->
     <div class="botones">
