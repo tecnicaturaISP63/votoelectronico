@@ -74,6 +74,13 @@
                 print "<input type='submit' value='Cierre y Resultado' class='btnff6'>";
                 print "</form>";
                 
+                print "<form action='consultaralumno.php' method='post'>";
+                print "<input id='codigo' type='hidden' name='QR' value='$qrleido'>";
+                print "<input id='codigo' type='hidden' name='idQR' value='$idQr'>";
+                print "<input id='codigo' type='hidden' name='habilitar' value=0>";
+                print "<input type='submit' value='Consultar Alumno' class='btnff6'>";
+                print "</form>";
+                
                 print "<form action='qr.php' method='post'>";
                 print "<input type='submit' value='Salir' class='btnff6'>";
                 print "</form>";

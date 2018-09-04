@@ -209,6 +209,96 @@ function ObtenerListas()
     }
 }
 
+function BuscarPorNombre($parteDelNombre)
+{
+    $consultaSQL = "SELECT * FROM alumnos WHERE ApelNom LIKE '%$parteDelNombre%'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function BuscarPorIdAlumno($idAlumno)
+{
+    $consultaSQL = "SELECT * FROM `alumnos` WHERE id_alumno = $idAlumno";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function BuscarPorDNI($DNIAlumno)
+{
+    $consultaSQL = "SELECT * FROM `alumnos` WHERE dni LIKE '%$DNIAlumno%'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function BuscarPorSexo($sexoAlumno)
+{
+    $consultaSQL = "SELECT * FROM alumnos WHERE sexo = '$sexoAlumno'";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function BuscarPorRegular($alumnoRegular)
+{
+    $consultaSQL = "SELECT * FROM alumnos WHERE regular = $alumnoRegular";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+function BuscarPorDeBaja($alumnoDeBaja)
+{
+    $consultaSQL = "SELECT * FROM alumnos WHERE debaja = $alumnoDeBaja";
+    
+    $resultado=  EjecutarConsulta($consultaSQL);
+    if (isset($resultado))
+    {
+        return $resultado;    
+    }
+    else 
+    {
+        return false;
+    }
+}
+
 function ObtenerElecciones()
 {
     $consultaSQL = "SELECT * FROM eleccion ORDER BY idEleccion ASC";
