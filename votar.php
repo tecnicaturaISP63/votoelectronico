@@ -82,7 +82,7 @@
         </sonido>
         <hr>
             <img id="logo" src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
-            <a>Bienvenido administrador</a>
+            <a>¿Querés que se implementen centros de estudiantes en todas las escuelas?</a>
         <hr>
         <b><p id="centro"> Centro de Estudiante </p></b> <b><p id="instituto" align="right"> ISP  N° 63  Las  Toscas </p></b>
         <hr>
