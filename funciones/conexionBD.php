@@ -494,3 +494,72 @@ function InsertarLista($nombre, $urlImagen, $idEleccion)
         return false;
     }
 }
+
+function ObtenerPadron2($idEleccion)
+{
+    $consultaSQL="SELECT a.id_alumno, dni,  ApelNom  FROM padron p , ALUMNOS A  WHERE a.id_alumno=p.IDAlumno AND IDELECCION=$idEleccion";
+    $resultado=  EjecutarConsulta($consultaSQL);
+
+     if (isset($resultado))
+    {
+            return $resultado;    
+        }
+     else {     return false;}
+        
+
+}
+ function Eliminaralumnopadron($id_alumno, $idEleccion)
+
+ {
+    $consultaSQL="delete from padron WHERE idAlumno=$id_alumno and idEleccion=$idEleccion";
+    $resultado= EjecutarConsulta($consultaSQL);
+    
+    if (isset($resultado))
+    {
+            return $resultado;    
+        }
+     else {     return false;}
+ }
+
+ function BuscarUnAlumno($idAlumno)
+{
+    $consultaSQL=" SELECT id_alumno, dni,ApelNom ,sexo  FROM alumnos where id_alumno=$idAlumno and debaja=false order by ApelNom";
+    $resultado=  EjecutarConsulta($consultaSQL);
+
+     if (isset($resultado))
+    {
+            return $resultado;    
+        }
+     else {     return false;}
+        
+
+}
+
+function ModificarAlumno($idAlumno,$ApelNom,$dni,$sexo,$debaja)
+{
+ $consultaSQL= "UPDATE alumnos SET ApelNom='$ApelNom',dni='$dni',sexo='$sexo',regular=1,deBaja=$debaja WHERE id_alumno=$idAlumno";         
+  $resultado=  EjecutarConsulta($consultaSQL);
+if (isset($resultado))
+{
+       return true;    
+}
+else 
+    {     return false;}
+
+
+}
+
+function ObtenerAlumnos()
+{
+    /*muestro Todos Alumnos que no estan dados de baja*/
+    $consultaSQL=" SELECT id_alumno as idalumno, dni,ApelNom  FROM alumnos  where debaja=false order by ApelNom";
+    $resultado=  EjecutarConsulta($consultaSQL);
+
+     if (isset($resultado))
+    {
+            return $resultado;    
+        }
+     else {     return false;}
+        
+
+}

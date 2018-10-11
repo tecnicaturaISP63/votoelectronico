@@ -82,11 +82,11 @@
         </sonido>
         <hr>
             <img id="logo" src="Imagenes/logo.png" alt="logo" style="width: 150px; height: 150px;">
-            <a>¿Querés que se implementen centros de estudiantes en todas las escuelas?</a>
+            <a>Voto electrónico</a>
         <hr>
         <b><p id="centro"> Centro de Estudiante </p></b> <b><p id="instituto" align="right"> ISP  N° 63  Las  Toscas </p></b>
         <hr>
-        <h2> <center> ELIGE A LA LISTA QUE DESEAS VOTAR</font> </center> </h2>
+        <h2> <center>¿Querés que se implementen centros de estudiantes en todas las escuelas?</font> </center> </h2>
         <hr>
 
         <?php      
