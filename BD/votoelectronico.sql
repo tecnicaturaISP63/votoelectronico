@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-08-2018 a las 02:26:07
+-- Tiempo de generación: 17-10-2018 a las 00:47:58
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -42,7 +42,7 @@ CREATE TABLE `alumnos` (
 INSERT INTO `alumnos` (`id_alumno`, `ApelNom`, `dni`, `sexo`, `regular`, `debaja`) VALUES
 (288, 'ACEVEDO, CARLA TAMARA', '38978043', 'F', 1, 0),
 (289, 'ACEVEDO, ALDANA CATERINA', '40361152', 'F', 1, 0),
-(290, 'ACEVEDO, LEONEL EMANUEL', '39499967', 'M', 1, 0),
+(290, 'ACEVEDO, LEONEL EMANUEL', '39499967', 'F', 1, 0),
 (291, 'ACEVEDO, NATALIA VANESA', '28722466', 'F', 1, 0),
 (292, 'ACEVEDO, PRISCILA MARIA LUZ', '37828702', 'F', 1, 0),
 (293, 'ACOSTA, LORNA MARÍA', '38817935', 'F', 1, 0),
@@ -352,9 +352,10 @@ CREATE TABLE `eleccion` (
 --
 
 INSERT INTO `eleccion` (`idEleccion`, `nombre`, `fecha`, `habilitado`) VALUES
-(1, 'prueba', '2018-07-24', 1),
+(1, 'prueba', '2018-07-24', 0),
 (2, 'test', '2018-07-11', 0),
-(3, 'testing', '2018-07-12', 0);
+(3, 'testing', '2018-07-12', 0),
+(4, 'votoElectronico', '2018-10-09', 1);
 
 -- --------------------------------------------------------
 
@@ -379,7 +380,10 @@ INSERT INTO `listas` (`id_lista`, `idEleccion`, `nombre`, `imagen`) VALUES
 (2, 1, 'Alianza Estudiantes', 'logo ADE.png'),
 (3, 2, 'Voto en Blanco', 'logo blanco.png'),
 (4, 3, 'Voto en Blanco', 'logo blanco.png'),
-(5, 2, 'Nueva', 'Mangrullo4.jpg');
+(5, 2, 'Nueva', 'Mangrullo4.jpg'),
+(6, 4, 'No sé', 'nose.png'),
+(7, 4, 'Sí', 'pulgar-arriba.png'),
+(8, 4, 'No', 'pulgar-abajo.png');
 
 -- --------------------------------------------------------
 
@@ -660,7 +664,7 @@ INSERT INTO `qr` (`idQR`, `idEleccion`, `QRcodigo`, `usado`, `administrador`) VA
 (641, 1, 'lHcyb2Tpe9NIYRlWkOIV', 0, 0),
 (642, 1, 'hoAnFT6y3fDAzlFWEwYs', 0, 0),
 (643, 1, 'Zt6KLCADbMy1rTAy5901', 0, 0),
-(644, 1, 'OXhO2OVnfCVDcx22MarK', 0, 0),
+(644, 4, 'OXhO2OVnfCVDcx22MarK', 0, 1),
 (645, 1, 'yU8VQunwIOo2FyXLjhU9', 0, 0),
 (646, 1, 'cgsqDOxud2JpJZtA8SLF', 0, 0),
 (647, 1, '9nYubbfi0swrIyLu5oyX', 0, 0),
@@ -1280,7 +1284,14 @@ INSERT INTO `votos` (`id_voto`, `id_lista`, `idEleccion`, `idQR`) VALUES
 (10, 2, 1, 650),
 (11, 1, 1, 643),
 (12, 2, 1, 643),
-(13, 1, 1, 643);
+(13, 1, 1, 643),
+(14, 1, 1, 644),
+(15, 1, 1, 644),
+(16, 6, 4, 644),
+(17, 6, 4, 644),
+(18, 6, 4, 644),
+(19, 7, 4, 644),
+(20, 7, 4, 644);
 
 --
 -- Índices para tablas volcadas
@@ -1339,12 +1350,12 @@ ALTER TABLE `alumnos`
 -- AUTO_INCREMENT de la tabla `eleccion`
 --
 ALTER TABLE `eleccion`
-  MODIFY `idEleccion` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEleccion` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id_lista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_lista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `padron`
 --
@@ -1359,7 +1370,7 @@ ALTER TABLE `qr`
 -- AUTO_INCREMENT de la tabla `votos`
 --
 ALTER TABLE `votos`
-  MODIFY `id_voto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_voto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- Restricciones para tablas volcadas
 --
