@@ -108,7 +108,7 @@
 
                         QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 5); 
                         //muestro la imagen
-                        print '<td><img src="'.$PNG_WEB_DIR.basename($filename).'" /><br/></td>';  
+                        print '<td><img src="'.$PNG_WEB_DIR.basename($filename).'" /></td>';  
                     }
                 }//cierra el for
                 print '</tr>';//cierro tr
